@@ -1,0 +1,27 @@
+<header class="header-6">
+  <div class="branding">
+    <a routerLink="/home" class="nav-link">
+      <clr-icon shape="shopping-bag" class="is-solid"></clr-icon>
+      <span class="title">G-Kart</span>
+    </a>
+  </div>
+
+  <div class="header-nav">
+    <a routerLink="/shopping-cart" class="nav-link nav-text">Shopping Cart</a>
+    <a routerLink="/login" class="nav-link nav-text" *ngIf="!(auth.user$ | async)">Login</a>
+  </div>
+  <div class="header-actions" *ngIf="appUser">
+    <clr-dropdown>
+      <button class="nav-text" clrDropdownTrigger>
+        {{appUser.name}}
+        <clr-icon shape="caret down"></clr-icon>
+      </button>
+      <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+        <a routerLink="/my-orders" clrDropdownItem>My Orders</a>
+        <a routerLink="/admin/orders" clrDropdownItem *ngIf="appUser.isAdmin">Manage Orders</a>
+        <a routerLink="/admin/products" clrDropdownItem *ngIf="appUser.isAdmin">Manage Products</a>
+        <a (click)="logout()" clrDropdownItem >Logout</a>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+  </div>
+</header>
